@@ -32,13 +32,21 @@ public class AppUserService {
 
     public AppUser updateAppUserById(int id, AppUser changedAppUser) {
 
-        AppUser appUser = this.findAppUserById(id);
+        AppUser appUser = this.findAppUserById(id); //hur mycket logik krävs egentligen här? Förutsatt att man vill kunna
+                                                    // ändra ganska mycket i sin appuser
 
-        appUser = changedAppUser;
+        if (changedAppUser.getName() != null){
+            appUser.setName(changedAppUser.getName());
+        }
 
         return this.saveUser(appUser);
 
     }
 
 
+    public AppUser deleteUserById(int id) {
+        AppUser deletedUser = this.findAppUserById(id);
+        appUserRepo.deleteById(id);
+        return deletedUser;
+    }
 }
