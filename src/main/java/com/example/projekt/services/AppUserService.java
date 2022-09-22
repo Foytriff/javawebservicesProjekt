@@ -15,12 +15,30 @@ public class AppUserService {
 
 
     public List<AppUser> findAll(){
-        List<AppUser> users = appUserRepo.findAll();
-        return users;
+        return appUserRepo.findAll();
+    }
+
+    public List<AppUser> findAll(String contains){
+        return appUserRepo.findAppUsersByNameContaining(contains).orElseThrow();
     }
 
     public AppUser saveUser(AppUser appUser){
         return appUserRepo.save(appUser);
     }
+
+    public AppUser findAppUserById(int id) {
+        return appUserRepo.findAppUserById(id).orElseThrow();
+    }
+
+    public AppUser updateAppUserById(int id, AppUser changedAppUser) {
+
+        AppUser appUser = this.findAppUserById(id);
+
+        appUser = changedAppUser;
+
+        return this.saveUser(appUser);
+
+    }
+
 
 }

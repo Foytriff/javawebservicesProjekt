@@ -10,25 +10,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("myApi/appuser")
+@RequestMapping("api/appuser")
 public class AppUserController {
 
     @Autowired
     private AppUserService appUserService;
 
-    @GetMapping
+    @GetMapping("/welcome")
     public String welcomeMessage(){
         return "Hello, World";
     }
 
-    @GetMapping("/users")
-    public List<AppUser> findAll(){
-        return appUserService.findAll();
+    @GetMapping
+    public List<AppUser> findAll(@RequestParam(required = false, defaultValue = "") String contains){
+        return appUserService.findAll(contains);
+    }
+
+    @GetMapping("/{id}")
+    public AppUser getAppUser(@PathVariable int id){
+        return appUserService.findAppUserById(id);
     }
 
     @PostMapping
     public AppUser saveUser(@RequestBody AppUser appUser){
         return appUserService.saveUser(appUser);
     }
+
+    @PatchMapping
+    public AppUser saasdf(){return new AppUser();}
 
 }
