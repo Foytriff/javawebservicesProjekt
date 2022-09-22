@@ -26,9 +26,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception { //Vad är i httpsecurity, förklara det pls :)
         httpSecurity
-                .authorizeRequests(auth -> auth.anyRequest().authenticated())
+                .csrf().disable()
+                .authorizeRequests(auth -> auth
+                        .antMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated())
                 .userDetailsService(userDetailsService)  //User implementar/extendar uds?
                 .httpBasic();
         return httpSecurity.build();
