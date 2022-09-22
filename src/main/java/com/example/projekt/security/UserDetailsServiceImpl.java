@@ -17,9 +17,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private AppUserRepo appUserRepo;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -28,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return User.builder()
                 .username(appUser.getUsername())
-                .password(passwordEncoder.encode(appUser.getPassword())) //kanske inte encoda här, utan gör det i commandlinerunner i app?
+                .password(appUser.getPassword())
                 .authorities(new SimpleGrantedAuthority("ROLE_ADMIN"))
                 .build();
     }

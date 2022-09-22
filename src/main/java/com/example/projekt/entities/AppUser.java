@@ -21,10 +21,10 @@ public class AppUser {
 
     }
 
-    public AppUser(String name, String username){
+    public AppUser(String name, String username, String password){
         this.name = name;
         this.username = username;
-        password = "1234";
+        this.password = password;
     }
 
     public int getId() {
