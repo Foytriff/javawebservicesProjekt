@@ -14,4 +14,5 @@ public interface AppUserRepo extends JpaRepository<AppUser, Integer> {
 
     public Optional<List<AppUser>> findAppUsersByNameContaining(String contains);
 
+    public AppUser findAppUserByUsername(String username);
 }
